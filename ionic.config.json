@@ -1,0 +1,7 @@
+{
+  "name": "angular-ionic-capacitor-app-with-relational-storage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

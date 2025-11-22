@@ -193,11 +193,13 @@ export async function closeRdsForNative() {
 export async function exportRdsToJSON() {
   return {
     'authors': await ads.getRepository(entities.Author).find({ loadEagerRelations: false }),
+    'posts': await ads.getRepository(entities.Post).find({ loadEagerRelations: false })
   }
 }
 
 export async function logRdsCounts() {
   console.log('Rds counts ===============>', {
     'authors': await ads.getRepository(entities.Author).count(),
+    'posts': await ads.getRepository(entities.Post).count()
   })
 }

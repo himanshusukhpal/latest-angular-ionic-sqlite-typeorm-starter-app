@@ -11,11 +11,11 @@ import { distinctUntilChanged } from 'rxjs/internal/operators/distinctUntilChang
 import * as entities from '../entities/index';
 import * as migrations from '../migrations/index';
 
-import { CapacitorConnectionOptions } from 'typeorm/driver/capacitor/CapacitorConnectionOptions';
-import { SqljsConnectionOptions } from 'typeorm/driver/sqljs/SqljsConnectionOptions';
+// import { CapacitorConnectionOptions } from 'typeorm/driver/capacitor/CapacitorConnectionOptions';
+// import { SqljsConnectionOptions } from 'typeorm/driver/sqljs/SqljsConnectionOptions';
 import { SQLiteDBConnection } from '@capacitor-community/sqlite';
 
-const webDataSourceConfig: SqljsConnectionOptions = {
+const webDataSourceConfig: any = {
   name: 'appDbConnection',
   type: 'sqljs',
   location: sqliteParams.dbName,
@@ -31,7 +31,7 @@ const webDataSourceConfig: SqljsConnectionOptions = {
   migrationsRun: false, // Required with capacitor type
 };
 
-const dataSourceConfig: CapacitorConnectionOptions = {
+const dataSourceConfig: any = {
   name: 'appDbConnection',
   type: 'capacitor',
   driver: sqliteParams.connection,

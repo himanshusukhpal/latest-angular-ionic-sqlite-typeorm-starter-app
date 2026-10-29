@@ -52,7 +52,7 @@ let needToSaveToWebStore = false;
 let saveToWebStoreSubject: Subject<any>;
 
 export let migrationsResult: any;
-export const initRdsErrors: any[] = [];
+export const initAdsErrors: any[] = [];
 
 let nativeDbConn: SQLiteDBConnection;
 
@@ -96,7 +96,7 @@ function saveToWebStore(uint8Data: Uint8Array) {
     }
   } catch (e) {
     window.alert(
-      'Storage failure, please sync all data, data will be lost on closing application. Please contact RedSky'
+      'Storage failure!'
     );
   }
 }
@@ -122,7 +122,7 @@ export async function initializeAds(requestOrigin: string) {
     try {
       initializing = true;
 
-      // console.log('rds initialize, requested By: ' + requestOrigin);
+      // console.log('ads initialize, requested By: ' + requestOrigin);
       if (sqliteParams.platform === 'web') {
         await initLocalForage();
         await initSqlite();
@@ -142,7 +142,7 @@ export async function initializeAds(requestOrigin: string) {
       migrationsResult = await ads.runMigrations();
     } catch (e) {
       // console.log(e);
-      initRdsErrors.push(e);
+      initAdsErrors.push(e);
       throw e;
     } finally {
       initializing = false;
@@ -150,9 +150,9 @@ export async function initializeAds(requestOrigin: string) {
   }
 }
 
-export async function closeRdsForWeb(_event?: any) {
+export async function closeAdsForWeb(_event?: any) {
   if (ads.isInitialized && sqliteParams.platform === 'web') {
-    // console.log('Close Rds for web');
+    // console.log('Close Ads for web');
     try {
       await ads.destroy(); // TypeORM method to close the connection
       // console.log('Database connection closed successfully.');
@@ -162,9 +162,9 @@ export async function closeRdsForWeb(_event?: any) {
   }
 }
 
-export async function closeRdsForNative() {
+export async function closeAdsForNative() {
   if (ads.isInitialized) {
-    // console.log('Close Rds for native');
+    // console.log('Close Ads for native');
     try {
       const { dbName, readonly } = sqliteParams;
 
@@ -190,15 +190,15 @@ export async function closeRdsForNative() {
   }
 }
 
-export async function exportRdsToJSON() {
+export async function exportAdsToJSON() {
   return {
     'authors': await ads.getRepository(entities.Author).find({ loadEagerRelations: false }),
     'posts': await ads.getRepository(entities.Post).find({ loadEagerRelations: false })
   }
 }
 
-export async function logRdsCounts() {
-  console.log('Rds counts ===============>', {
+export async function logAdsCounts() {
+  console.log('Ads counts ===============>', {
     'authors': await ads.getRepository(entities.Author).count(),
     'posts': await ads.getRepository(entities.Post).count()
   })

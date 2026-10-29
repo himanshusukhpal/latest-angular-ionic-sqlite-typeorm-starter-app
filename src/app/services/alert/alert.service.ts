@@ -1,7 +1,7 @@
 /* eslint-disable curly */
 import { Injectable } from '@angular/core';
 import { AlertController, AlertOptions, ToastController } from '@ionic/angular';
-import { blockApp, getErrorMessage } from 'src/app/utils/error.utils';
+import { blockApp, getErrorMessage } from '../../utils/error.utils';
 
 @Injectable({
   providedIn: 'root'

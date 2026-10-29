@@ -82,9 +82,7 @@
             "development": {
               "buildTarget": "app:build:development"
             },
-            "ci": {
-              "progress": false
-            }
+            "ci": { }
           },
           "defaultConfiguration": "development"
         },
@@ -95,27 +93,28 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "ui": true,
+            "watch": true,
+            "runnerConfig": true,
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
-              }
+            "reporters": [
+              "default"
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "coverageReporters": [
+              "html",
+              "text-summary"
+            ],
+            "setupFiles": [],
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           },
           "configurations": {
             "ci": {
               "progress": false,
-              "watch": false
+              "watch": false,
+              "buildTarget": ":build:testing-ci"
             }
           }
         },

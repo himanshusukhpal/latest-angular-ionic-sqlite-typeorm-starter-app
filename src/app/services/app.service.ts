@@ -1,7 +1,7 @@
-import appPackage from "package.json";
+import appPackage from "../../../package.json";
 
 import { Injectable } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular/standalone';
+import { NavController, LoadingController } from '@ionic/angular';
 import { AlertService } from "./alert/alert.service";
 
 

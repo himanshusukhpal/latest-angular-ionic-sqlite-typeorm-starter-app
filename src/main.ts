@@ -1,19 +1,19 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import sqliteParams from './databases/sqlite/params';
-import { defineCustomElements as pwaElements } from '@ionic/pwa-elements/loader';
+// import { defineCustomElements as pwaElements } from '@ionic/pwa-elements/loader';
 import { initializeAds } from './databases/datasources/ads.datasource';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideHttpClient(withInterceptors([])),
+    provideHttpClient(withXhr(), withInterceptors([])),
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 })
@@ -37,7 +37,7 @@ bootstrapApplication(AppComponent, {
       }
 
       // Load custom Ionic PWA elements
-      pwaElements(window);
+      // pwaElements(window);
     }
     // else {
     //   initializeAds('main'); // Uncomment if needed
